@@ -6,7 +6,7 @@
 /*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:22:41 by acastrov          #+#    #+#             */
-/*   Updated: 2024/10/08 21:14:55 by acastrov         ###   ########.fr       */
+/*   Updated: 2024/10/08 21:22:45 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,21 +21,21 @@ int	ft_putchar_printf(char c)
 int	ft_printf(char const *format, ...)
 {
 	va_list	args; // We declare arg variable
-	int	format_i; // A counter to keep track of conversion
-	int	switch_i;
+	int	format_i; // Counter for chars of format
+	int	switch_i; // Counter for chars resulting of using subft adns specifiers
 
 	if (!format)
 		return (0);
 	va_start(args, format); // We specified that args will be after format
-	switch_i = 0;
 	format_i = 0;
-	while (format[format_i] != '\0')
+	switch_i = 0;
+	while (format[format_i] != '\0') // We iterate through the string
 	{
-		if(format[format_i] != '%')
+		if(format[format_i] != '%') // While not an specifier, we write as usual
 			format_i += ft_putchar_printf(format[format_i]); // In the switch we call the modified versions (they all need to return an int for char printed) with the arg definition, for example, putstring(args, char*). We nned to send a fail message if theres the wrong type
 		if (format[format_i] == '%') // In case we found a %, we have to call our switcher
 		{
-			format_i++;
+			format_i++; // We need tocheck how to iterate thorugh the string without increasing i
 			switch_i += ft_switcher(format[format_i], args); // Check if i iterates after operation, also check for null
 		}
 	}
