@@ -6,7 +6,7 @@
 /*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:22:41 by acastrov          #+#    #+#             */
-/*   Updated: 2024/10/09 19:50:11 by acastrov         ###   ########.fr       */
+/*   Updated: 2024/10/09 20:53:18 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,18 @@ static int	ft_switcher(char specifier, va_list args) // Switch to x ft accoring 
 		switch_i = ft_putuint_printf(va_arg(args, unsigned int));
 	else if (specifier == 'x' || specifier == 'X')
 		switch_i = ft_hex(va_arg(args, int), specifier);
+	else if (specifier == 'p')
+		switch_i = ft_ptr(va_arg(args, void *));
 	return (switch_i);
 }
 
 int	main(void)
 {
-	ft_printf("\nMy numero de caracteres es %d", ft_printf("This is a char: %c\nan string: %s\na int: %d\na unsigned int: %u\na %% symbol\na hex lower %x\na hex upper %X\nand a break%", 'a', "testing string", 3891281, 2147483648, 590, 590));
+	char *str;
+
+	str = "Esta es mi string";
+	ft_printf("\nMy numero de caracteres es %d", ft_printf("This is a char: %c\nan string: %s\na int: %d\na unsigned int: %u\na %% symbol\na hex lower %x\na hex upper %X\na pointer %p\nand a break%", 'a', "testing string", 3891281, 2147483647, 590, 590, str));
+	write(1, "\n\n", 2);
+	printf("\nMy numero de caracteres es %d", printf("This is a char: %c\nan string: %s\na int: %d\na unsigned int: %u\na %% symbol\na hex lower %x\na hex upper %X\na pointer %p\nand a break", 'a', "testing string", 3891281, 2147483647, 590, 590, str));
 	return (0);
 }
