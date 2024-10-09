@@ -6,14 +6,14 @@
 /*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 19:33:00 by acastrov          #+#    #+#             */
-/*   Updated: 2024/10/09 19:20:00 by acastrov         ###   ########.fr       */
+/*   Updated: 2024/10/09 19:37:13 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "libft_printf.h"
 
-int	ft_putchar_printf(char c)
+int	ft_putchar_printf(char c) // Maybe we can delete this one and make room for hex ft in one single file
 {
 	return ((int)write(1, &c, 1));
 }

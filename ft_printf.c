@@ -6,7 +6,7 @@
 /*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:22:41 by acastrov          #+#    #+#             */
-/*   Updated: 2024/10/09 19:30:54 by acastrov         ###   ########.fr       */
+/*   Updated: 2024/10/09 19:50:11 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,19 +50,17 @@ static int	ft_switcher(char specifier, va_list args) // Switch to x ft accoring 
 
 	switch_i = 0;
 	if (specifier == '%') // If we find other %, we write it
-		return (write(1, "%", 1));
-	else if (specifier == 'c') // If specifier it's c, we pass the argument of the list as a char (int ASCII Value)
+		return ((int)write(1, "%", 1));
+	else if (specifier == 'c')
 		switch_i = ft_putchar_printf(va_arg(args, int));
 	else if (specifier == 's')
-		switch_i = ft_putstr_printf(va_arg(args, char *)); // Call to pustr_printf
+		switch_i = ft_putstr_printf(va_arg(args, char *));
 	else if (specifier == 'd' || specifier == 'i')
-		switch_i = ft_putnbr_printf(va_arg(args, int)); // Call to putnbr_printf
+		switch_i = ft_putnbr_printf(va_arg(args, int));
 	else if (specifier == 'u')
-		switch_i = ft_putuint_printf(va_arg(args, unsigned int)); // Call to putnbr_printf
-	else if (specifier == 'x')
-		switch_i = ft_hex_lower(va_arg(args, int)); // Call to putnbr_printf
-	else if (specifier == 'X')
-		switch_i = ft_hex_upper(va_arg(args, int)); // Call to putnbr_printf
+		switch_i = ft_putuint_printf(va_arg(args, unsigned int));
+	else if (specifier == 'x' || specifier == 'X')
+		switch_i = ft_hex(va_arg(args, int), specifier);
 	return (switch_i);
 }
 
