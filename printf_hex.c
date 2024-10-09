@@ -6,7 +6,7 @@
 /*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 19:03:15 by acastrov          #+#    #+#             */
-/*   Updated: 2024/10/09 20:50:15 by acastrov         ###   ########.fr       */
+/*   Updated: 2024/10/09 21:21:59 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ int	ft_hex(int n, char specifier)
 	else
 		hex_base = "0123456789ABCDEF";
 	i = 0;
-	if (!n)
-		return (0);
 	if (n < 0)
 	{
 		i += (int)write(1, "-", 1);
@@ -52,8 +50,12 @@ int	ft_ptr(void *ptr)
 	i = 0;
 	hex_base = "0123456789abcdef";
 	i += (int)write(1, "0x", 2);
-	if (n >= 16)
-		i += ft_hex(n / 16, 'x');
+	while (n >= 16)
+	{
+		d = n % 16;
+		i += (int)write(1, &hex_base[d], 1);
+		n = n / 16;
+	}
 	d = n % 16;
 	i += (int)write(1, &hex_base[d], 1);
 	return(i);
