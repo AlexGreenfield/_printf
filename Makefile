@@ -6,7 +6,7 @@
 #    By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/27 17:54:28 by acastrov          #+#    #+#              #
-#    Updated: 2024/10/09 17:29:40 by acastrov         ###   ########.fr        #
+#    Updated: 2024/10/09 19:18:25 by acastrov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ LIBFT = libft.a
 LIBFTDIR = ./libft
 
 SRCS = ft_printf.c \
-	libft_sub_ft.c
+	libft_sub_ft.c \
+	printf_hex.c
 
 OBJS = $(SRCS:.c=.o)
 

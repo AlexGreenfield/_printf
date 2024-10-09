@@ -6,7 +6,7 @@
 /*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 19:32:20 by acastrov          #+#    #+#             */
-/*   Updated: 2024/10/09 18:01:49 by acastrov         ###   ########.fr       */
+/*   Updated: 2024/10/09 19:31:15 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,14 @@
 #include "libft/libft.h"
 #include <stdarg.h>
 
-// Modified libft functions to return int
+// Modified libft functions to return int, libft_sub_ft.c
 int	ft_putchar_printf(char c);
 int	ft_putstr_printf(char *s);
 int	ft_putnbr_printf(int n);
+int	ft_putuint_printf(unsigned int n);
+
+// Hex ft
+int	ft_hex_lower(int n);
+int	ft_hex_upper(int n);
 
 #endif
