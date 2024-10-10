@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft_printf.h"
-
+// We can acomodate this two ft in sub_ft file and remove libft
 int	ft_hex(int n, char specifier)
 {
 	unsigned int	nb;

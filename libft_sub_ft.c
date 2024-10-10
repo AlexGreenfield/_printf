@@ -18,7 +18,7 @@ int	ft_putchar_printf(char c) // Maybe we can delete this one and make room for 
 	return ((int)write(1, &c, 1));
 }
 
-int	ft_putstr_printf(char *s)
+int	ft_putstr_printf(char *s) // We can remove call to ft_strlen if we integrate it
 {
 	if (*s)
 		return ((int)write(1, s, ft_strlen(s)));

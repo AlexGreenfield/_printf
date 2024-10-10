@@ -62,7 +62,7 @@ static int	ft_switcher(char specifier, va_list args) // Switch to x ft accoring 
 	else if (specifier == 'x' || specifier == 'X')
 		switch_i = ft_hex(va_arg(args, int), specifier);
 	else if (specifier == 'p')
-		switch_i = ft_ptr(va_arg(args, void *));
+		switch_i = ft_ptr(va_arg(args, void *)); // Can we cast it directly to uintptr_t?
 	// We need to return if specifier its not a available value
 	return (switch_i);
 }
