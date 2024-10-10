@@ -57,7 +57,7 @@ int	ft_putuint_printf(unsigned int n)
 	i = 0;
 	if (n >= 10)
 	{
-		i += ft_putnbr_printf(n / 10);
+		i += ft_putuint_printf(n / 10);
 	}
 	d = (n % 10) + '0';
 	i += (unsigned int)write(1, &d, 1);
