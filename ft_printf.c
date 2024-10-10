@@ -6,13 +6,14 @@
 /*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:22:41 by acastrov          #+#    #+#             */
-/*   Updated: 2024/10/09 21:04:03 by acastrov         ###   ########.fr       */
+/*   Updated: 2024/10/10 19:24:39 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_printf.h"
 #include <stdio.h> // REMOVE
 
+static int	ft_checker(char const *format);
 static int	ft_switcher(char specifier, va_list args);
 
 int	ft_printf(char const *format, ...)
@@ -20,7 +21,7 @@ int	ft_printf(char const *format, ...)
 	int		i; // Counter for chars of format
 	va_list	args; // We declare arg variable
 
-	if (!format)
+	if (ft_checker(format) == 0)
 		return (0);
 	va_start(args, format); // We specified that args will be after format
 	i = 0;
@@ -28,7 +29,7 @@ int	ft_printf(char const *format, ...)
 	{
 		if (*format != '%') // While not an specifier, we write as usual
 		{
-			i += ft_putchar_printf(*format); // In the switch we call the modified versions (they all need to return an int for char printed) with the arg definition, for example, putstring(args, char*). We nned to send a fail message if theres the wrong type
+			i += ft_putchar_printf(*format); // In the switch we call the modified versions (they all need to return an int for char printed) with the arg definition, for example, putstring(args, char*). We need to send a fail message if theres the wrong type
 			format++;
 		}
 		if (*format == '%') // In case we found a %, we have to call our switcher
@@ -37,13 +38,36 @@ int	ft_printf(char const *format, ...)
 			if (!*format)
 				break ;
 			i += ft_switcher(*format, args); // We add the result of the ft called by switch
-			format++;
+			format++; // We need a total breaker if valid specifier
 		}
 	}
 	va_end(args);
 	return (i);
 }
+static int	ft_checker(char const *format)
+{
+	char	*set;
 
+	if (!format)
+		return(0);
+	set = "cspdiuxX%";
+	while (*format)
+	{
+		while (*format && *format != '%')
+			format++;
+		if (*format == '%')
+		{
+			format++;
+			if (!*format || ft_strchr(set, *format) == NULL)
+				{
+					write(1, "WARNING: invalid specifier", 26);
+					return (0);
+				}
+			format++;
+		}
+	}
+	return (1);
+}
 static int	ft_switcher(char specifier, va_list args) // Switch to x ft accoring to its specifier
 {
 	int	switch_i;
@@ -61,11 +85,11 @@ static int	ft_switcher(char specifier, va_list args) // Switch to x ft accoring 
 		switch_i = ft_putuint_printf(va_arg(args, unsigned int));
 	else if (specifier == 'x' || specifier == 'X')
 		switch_i = ft_hex(va_arg(args, int), specifier);
-	else if (specifier == 'p')
-		switch_i = ft_ptr(va_arg(args, void *)); // Can we cast it directly to uintptr_t?
-	// We need to return if specifier its not a available value
+	else if (specifier == 'p') // This need fixing
+		switch_i += ft_ptr(va_arg(args, uintptr_t));
 	return (switch_i);
 }
+
 /*
 int	main(void)
 {
@@ -108,13 +132,13 @@ int main()
 	n = printf("%s",ptr); printf(" | Carácteres: %d\n",n);
 
 	ptr = NULL;
-	//n_ft = ft_printf("%s",ptr); printf(" | Carácteres FT: %d\n",n_ft);
+	n_ft = ft_printf("%s",ptr); printf(" | Carácteres FT: %d\n",n_ft);
 	n = printf("%s",ptr); printf(" | Carácteres: %d\n",n);
 	//! PUNTEROS
 	printf("---------------------------\n");
 	printf("PUNTEROS\n");
 	char *my_ptr = NULL;
-    //n_ft = ft_printf("%p",my_ptr); printf(" | Carácteres FT: %d\n",n_ft);
+    n_ft = ft_printf("%p",my_ptr); printf(" | Carácteres FT: %d\n",n_ft);
 	n = printf("%p",my_ptr); printf(" | Carácteres: %d\n",n);
 	my_ptr = str;
 	n_ft = ft_printf("%p",my_ptr); printf(" | Carácteres FT: %d\n",n_ft);
@@ -150,6 +174,11 @@ int main()
 	printf("PORCENTAJES\n");
  	n_ft = ft_printf(" %% "); printf(" | Carácteres FT: %d\n",n_ft);
 	n = printf(" %% ");  printf(" | Carácteres: %d\n",n);
+
+//! Diferenciador erroneo
+	printf("---------------------------\n");
+	printf("DIFERENCIADOR\n");
+ 	n_ft = ft_printf("%k"); printf(" | Carácteres FT: %d\n",n_ft);
 system("leaks -q a.out");
 	return (0);
 }

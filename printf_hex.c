@@ -6,7 +6,7 @@
 /*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 19:03:15 by acastrov          #+#    #+#             */
-/*   Updated: 2024/10/09 21:21:59 by acastrov         ###   ########.fr       */
+/*   Updated: 2024/10/10 19:32:08 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,26 +37,26 @@ int	ft_hex(int n, char specifier)
 	return(i);
 }
 
-int	ft_ptr(void *ptr)
+int	ft_ptr(uintptr_t ptr)
 {
-	uintptr_t		n;
-	unsigned int	d;
-	int				i;
-	char			*hex_base;
+	int		i;
+	int		index;
+	char	*hex_base;
+	char	buffer[16];
 
 	if (!ptr)
-		return (0);
-	n = (uintptr_t)ptr;
+		return ((int)write(1, "(nil)", 5));
 	i = 0;
+	index = 0;
 	hex_base = "0123456789abcdef";
 	i += (int)write(1, "0x", 2);
-	while (n >= 16)
+	while (ptr > 0)
 	{
-		d = n % 16;
-		i += (int)write(1, &hex_base[d], 1);
-		n = n / 16;
+		buffer[index++] = hex_base[ptr % 16];
+		ptr = ptr / 16;
 	}
-	d = n % 16;
-	i += (int)write(1, &hex_base[d], 1);
-	return(i);
+	index--;
+	while (index >= 0)
+		i += (int)write(1, &buffer[index--], 1);
+	return (i);
 }

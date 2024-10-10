@@ -6,7 +6,7 @@
 /*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 19:32:20 by acastrov          #+#    #+#             */
-/*   Updated: 2024/10/09 20:36:46 by acastrov         ###   ########.fr       */
+/*   Updated: 2024/10/10 16:27:05 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,6 @@ int	ft_putuint_printf(unsigned int n);
 
 // Hex ft
 int	ft_hex(int n, char specifier);
-int	ft_ptr(void *);
+int	ft_ptr(uintptr_t);
 
 #endif

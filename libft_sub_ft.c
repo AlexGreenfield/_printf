@@ -6,7 +6,7 @@
 /*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 19:33:00 by acastrov          #+#    #+#             */
-/*   Updated: 2024/10/09 19:37:13 by acastrov         ###   ########.fr       */
+/*   Updated: 2024/10/10 16:22:33 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@ int	ft_putchar_printf(char c) // Maybe we can delete this one and make room for 
 	return ((int)write(1, &c, 1));
 }
 
-int	ft_putstr_printf(char *s) // We can remove call to ft_strlen if we integrate it
+int	ft_putstr_printf(char *s)
 {
+	if (!s)
+		return ((int)write(1, "(null)", 6));
 	if (*s)
 		return ((int)write(1, s, ft_strlen(s)));
 	return (0);
@@ -57,7 +59,7 @@ int	ft_putuint_printf(unsigned int n)
 	i = 0;
 	if (n >= 10)
 	{
-		i += ft_putuint_printf(n / 10);
+		i += ft_putnbr_printf(n / 10);
 	}
 	d = (n % 10) + '0';
 	i += (unsigned int)write(1, &d, 1);
