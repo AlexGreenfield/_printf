@@ -6,7 +6,7 @@
 /*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:22:41 by acastrov          #+#    #+#             */
-/*   Updated: 2024/10/11 19:40:49 by acastrov         ###   ########.fr       */
+/*   Updated: 2024/10/11 19:48:40 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	ft_printf(char const *format, ...)
 		if (*format != '%')
 		{
 			i += write(1, format, 1);
+			format++;
 		}
 		if (*format == '%')
 		{
