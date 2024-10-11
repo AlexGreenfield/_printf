@@ -6,7 +6,7 @@
 /*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:22:41 by acastrov          #+#    #+#             */
-/*   Updated: 2024/10/11 19:48:40 by acastrov         ###   ########.fr       */
+/*   Updated: 2024/10/11 20:12:04 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_printf(char const *format, ...)
 	va_list	args;
 
 	if (ft_checker(format) == 0)
-		return (0);
+		return (-1);
 	va_start(args, format);
 	i = 0;
 	while (*format)
