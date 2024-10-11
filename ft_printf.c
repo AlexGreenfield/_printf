@@ -6,7 +6,7 @@
 /*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:22:41 by acastrov          #+#    #+#             */
-/*   Updated: 2024/10/11 19:00:40 by acastrov         ###   ########.fr       */
+/*   Updated: 2024/10/11 20:18:05 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ int	ft_printf(char const *format, ...)
 	int		i; // Counter for chars of format
 	va_list	args; // We declare arg variable
 
-	if (ft_checker(format) == 0)
-		return (0);
+	if (ft_checker(format) == 0) // If format it's null of invalid specifier, we return error
+		return (-1);
 	va_start(args, format); // We specified that args will be after format
 	i = 0;
 	while (*format) // We iterate through the string
