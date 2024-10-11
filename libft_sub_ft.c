@@ -6,13 +6,13 @@
 /*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 19:33:00 by acastrov          #+#    #+#             */
-/*   Updated: 2024/10/11 18:09:28 by acastrov         ###   ########.fr       */
+/*   Updated: 2024/10/11 18:59:26 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "libft_printf.h"
-
+// Writes a given string
 int	ft_putstr_printf(char *s)
 {
 	if (!s) // We check for null string and print warning
@@ -21,7 +21,7 @@ int	ft_putstr_printf(char *s)
 		return ((int)write(1, s, ft_strlen(s)));
 	return (0);
 }
-
+// Writes an int
 int	ft_putnbr_printf(int n)
 {
 	int	d;
@@ -45,7 +45,7 @@ int	ft_putnbr_printf(int n)
 	i += (int)write(1, &d, 1); // We print the modulus of 10
 	return (i);
 }
-
+// Writes an unsigned int
 int	ft_putuint_printf(unsigned int n) // The same as putnbr, but without negative conversion
 {
 	unsigned int	d;
@@ -60,7 +60,7 @@ int	ft_putuint_printf(unsigned int n) // The same as putnbr, but without negativ
 	i += (unsigned int)write(1, &d, 1);
 	return (i);
 }
-
+// Writes a hex decimal number
 int	ft_hex(int n, char specifier) // We print a number in hex decimal in upper or lower casse, according to the specifier
 {
 	long int	nb; // A int for managing INT_MIN to positive conversion. We don't take lint as argument as it will mess with pointer movement in var_args
@@ -83,7 +83,7 @@ int	ft_hex(int n, char specifier) // We print a number in hex decimal in upper o
 	i += (int)write(1, &hex_base[nb % 16], 1); // We print the hex_base index position
 	return (i);
 }
-
+// Writes a pointer address
 int	ft_ptr(uintptr_t ptr, int flag)
 {
 	int		i;

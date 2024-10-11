@@ -6,7 +6,7 @@
 /*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:22:41 by acastrov          #+#    #+#             */
-/*   Updated: 2024/10/11 17:47:09 by acastrov         ###   ########.fr       */
+/*   Updated: 2024/10/11 19:00:40 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	ft_checker(char const *format);
 static int	ft_switcher(char specifier, va_list args);
-
+// Replicates the behavior of printf
 int	ft_printf(char const *format, ...)
 {
 	int		i; // Counter for chars of format
@@ -43,6 +43,7 @@ int	ft_printf(char const *format, ...)
 	va_end(args);
 	return (i);
 }
+// Checks if there's format or if there's a invalid specifier
 static int	ft_checker(char const *format)
 {
 	char	*set;
@@ -67,6 +68,7 @@ static int	ft_checker(char const *format)
 	}
 	return (1);
 }
+// Switch ft according to specifier
 static int	ft_switcher(char specifier, va_list args) // Switch to x ft accoring to its specifier
 {
 	int	switch_i; // We add the number of char printed from the sub_ft
