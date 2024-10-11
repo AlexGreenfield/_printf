@@ -6,23 +6,18 @@
 /*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 19:33:00 by acastrov          #+#    #+#             */
-/*   Updated: 2024/10/10 16:22:33 by acastrov         ###   ########.fr       */
+/*   Updated: 2024/10/11 18:09:28 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "libft_printf.h"
 
-int	ft_putchar_printf(char c) // Maybe we can delete this one and make room for hex ft in one single file
-{
-	return ((int)write(1, &c, 1));
-}
-
 int	ft_putstr_printf(char *s)
 {
-	if (!s)
+	if (!s) // We check for null string and print warning
 		return ((int)write(1, "(null)", 6));
-	if (*s)
+	if (*s) // We print the entire string, managing the output bites via ft_strlen
 		return ((int)write(1, s, ft_strlen(s)));
 	return (0);
 }
@@ -32,26 +27,26 @@ int	ft_putnbr_printf(int n)
 	int	d;
 	int	i;
 
-	if (n == -2147483648)
+	if (n == -2147483648) // Hardcoding MIN_INT to avoid negative to positive conflicts
 	{
 		return ((int)write(1, "-2147483648", 11));
 	}
 	i = 0;
 	if (n < 0)
 	{
-		i += (int)write(1, "-", 1);
+		i += (int)write(1, "-", 1); // We manage negative numbers and convert them to positive
 		n = -n;
 	}
 	if (n >= 10)
 	{
-		i += ft_putnbr_printf(n / 10);
+		i += ft_putnbr_printf(n / 10); // Recursive call of putnbr_printf, so we print in the correct order
 	}
-	d = (n % 10) + '0';
-	i += (int)write(1, &d, 1);
+	d = (n % 10) + '0'; // Conversion of int to char
+	i += (int)write(1, &d, 1); // We print the modulus of 10
 	return (i);
 }
 
-int	ft_putuint_printf(unsigned int n)
+int	ft_putuint_printf(unsigned int n) // The same as putnbr, but without negative conversion
 {
 	unsigned int	d;
 	unsigned int	i;
@@ -66,3 +61,42 @@ int	ft_putuint_printf(unsigned int n)
 	return (i);
 }
 
+int	ft_hex(int n, char specifier) // We print a number in hex decimal in upper or lower casse, according to the specifier
+{
+	long int	nb; // A int for managing INT_MIN to positive conversion. We don't take lint as argument as it will mess with pointer movement in var_args
+	int				i; // Return value
+	char			*hex_base; // Chars of hexbase
+
+	if (specifier == 'X') // Only write in upper case if specified
+		hex_base = "0123456789ABCDEF";
+	else
+		hex_base = "0123456789abcdef";
+	i = 0;
+	nb = n;
+	if (n < 0)
+	{
+		i += (int)write(1, "-", 1); // Negative conversion
+		nb = -nb;
+	}
+	if (nb >= 16) // Recursive call to ft_hex, with n divided by 16
+		i += ft_hex(nb / 16, specifier);
+	i += (int)write(1, &hex_base[nb % 16], 1); // We print the hex_base index position
+	return (i);
+}
+
+int	ft_ptr(uintptr_t ptr, int flag)
+{
+	int		i;
+	char	*hex_base;
+
+	if (!ptr)
+		return ((int)write(1, "(nil)", 5)); // Warning for null pointer
+	i = 0;
+	hex_base = "0123456789abcdef";
+	if (flag == 1) // As we are going to call ft_ptr on recursive, we have to manage the first 0x. When we call ft_ptr from the switcher, it will print 0x just once thx to 1 flag
+		i += (int)write(1, "0x", 2);
+	if (ptr > 16)
+		i += ft_ptr(ptr / 16, 0); // The recursive call of ft_ptr is with 0 flag, wich avoids repeating the 0x prefix
+	i += (int)write(1, &hex_base[ptr % 16], 1); // We print in the hex_base
+	return (i);
+}

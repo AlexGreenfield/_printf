@@ -6,12 +6,11 @@
 /*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:22:41 by acastrov          #+#    #+#             */
-/*   Updated: 2024/10/10 19:24:39 by acastrov         ###   ########.fr       */
+/*   Updated: 2024/10/11 17:47:09 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_printf.h"
-#include <stdio.h> // REMOVE
 
 static int	ft_checker(char const *format);
 static int	ft_switcher(char specifier, va_list args);
@@ -29,7 +28,7 @@ int	ft_printf(char const *format, ...)
 	{
 		if (*format != '%') // While not an specifier, we write as usual
 		{
-			i += ft_putchar_printf(*format); // In the switch we call the modified versions (they all need to return an int for char printed) with the arg definition, for example, putstring(args, char*). We need to send a fail message if theres the wrong type
+			i += write(1, format, 1); // In the switch we call the modified versions (they all need to return an int for char printed) with the arg definition, for example, putstring(args, char*). We need to send a fail message if theres the wrong type
 			format++;
 		}
 		if (*format == '%') // In case we found a %, we have to call our switcher
@@ -48,137 +47,48 @@ static int	ft_checker(char const *format)
 {
 	char	*set;
 
-	if (!format)
+	if (!format) // First, we check for format
 		return(0);
-	set = "cspdiuxX%";
+	set = "cspdiuxX%"; // We set our specifier set
 	while (*format)
 	{
-		while (*format && *format != '%')
+		while (*format && *format != '%') // We move through the string
 			format++;
-		if (*format == '%')
+		if (*format == '%') // If we find a %, we check for the next character
 		{
 			format++;
-			if (!*format || ft_strchr(set, *format) == NULL)
+			if (!*format || ft_strchr(set, *format) == NULL )// If there's not a valid specifier, we print a warning and return 0, caution with null
 				{
 					write(1, "WARNING: invalid specifier", 26);
 					return (0);
 				}
-			format++;
+			format++; // If the specifier is ok, me move the pointer and search again
 		}
 	}
 	return (1);
 }
 static int	ft_switcher(char specifier, va_list args) // Switch to x ft accoring to its specifier
 {
-	int	switch_i;
+	int	switch_i; // We add the number of char printed from the sub_ft
+	int	ch; // A int variable to cast args for %c print
 
 	switch_i = 0;
 	if (specifier == '%') // If we find other %, we write it
 		return ((int)write(1, "%", 1));
-	else if (specifier == 'c')
-		switch_i = ft_putchar_printf(va_arg(args, int));
-	else if (specifier == 's')
+	else if (specifier == 'c') // Print just one char, done casting a char from args int
+		{
+		ch = va_arg(args, int);
+		switch_i = write(1, &ch, 1);
+		}
+	else if (specifier == 's') // We print a string
 		switch_i = ft_putstr_printf(va_arg(args, char *));
-	else if (specifier == 'd' || specifier == 'i')
+	else if (specifier == 'd' || specifier == 'i') // We threat both %d and %i as normal integers
 		switch_i = ft_putnbr_printf(va_arg(args, int));
-	else if (specifier == 'u')
+	else if (specifier == 'u') // Unsigned int
 		switch_i = ft_putuint_printf(va_arg(args, unsigned int));
-	else if (specifier == 'x' || specifier == 'X')
+	else if (specifier == 'x' || specifier == 'X') // Hex numbers, note the specifier
 		switch_i = ft_hex(va_arg(args, int), specifier);
-	else if (specifier == 'p') // This need fixing
-		switch_i += ft_ptr(va_arg(args, uintptr_t));
+	else if (specifier == 'p') // Pointer value. Note the flag value for the first call of ft_ptr to avoid repeating 0x
+		switch_i += ft_ptr(va_arg(args, uintptr_t), 1);
 	return (switch_i);
-}
-
-/*
-int	main(void)
-{
-	char *str;
-
-	str = "Esta es mi string";
-	ft_printf("\nMy numero de caracteres es %d", ft_printf("This is a char: %c\nan string: %s\na int: %d\na unsigned int: %u\na %% symbol\na hex lower %x\na hex upper %X\na pointer %p\nand a break%", 'a', "testing string", 3891281, 2147483647, 590, 590, str));
-	write(1, "\n\n", 2);
-	printf("\nMy numero de caracteres es %d", printf("This is a char: %c\nan string: %s\na int: %d\na unsigned int: %u\na %% symbol\na hex lower %x\na hex upper %X\na pointer %p\nand a break", 'a', "testing string", 3891281, 2147483647, 590, 590, str));
-	return (0);
-}
-*/
-#include <limits.h>
-int main()
-{
-	int n_ft;
-	int n;
-	char str[5] = "hola";
-	//! CARÁCTERES
-	printf("---------------------------\n");
-	printf("TEXTO SIN FORMATO\n");
-	n_ft = ft_printf("esto es una prueba"); printf(" |FT: %d\n",n_ft);
-	n = printf("esto es una prueba"); printf(" | : %d\n",n);
-	printf("---------------------------\n");
-	printf("CARÁCTERES\n");
-	n_ft = ft_printf("%c %c %c %c", 'H','O','L','A'); printf(" | Carácteres FT: %d\n",n_ft);
-	n = printf("%c %c %c %c", 'H','O','L','A'); printf(" | Carácteres: %d\n",n);
-
-	n_ft = ft_printf("%c", 126); printf(" | Carácteres FT: %d\n",n_ft);
-	n = printf("%c", 126); printf(" | Carácteres: %d\n",n);
-
-	n_ft = ft_printf("%c %c %c", '0',0,'1'); printf(" | Carácteres FT: %d\n",n_ft);
-	n = printf("%c %c %c", '0',0,'1'); printf(" | Carácteres: %d\n",n);
-
-	//! STRINGS
-	printf("---------------------------\n");
-	printf("STRINGS\n");
-	char *ptr = str;
-	n_ft = ft_printf("%s",ptr); printf(" | Carácteres FT: %d\n",n_ft);
-	n = printf("%s",ptr); printf(" | Carácteres: %d\n",n);
-
-	ptr = NULL;
-	n_ft = ft_printf("%s",ptr); printf(" | Carácteres FT: %d\n",n_ft);
-	n = printf("%s",ptr); printf(" | Carácteres: %d\n",n);
-	//! PUNTEROS
-	printf("---------------------------\n");
-	printf("PUNTEROS\n");
-	char *my_ptr = NULL;
-    n_ft = ft_printf("%p",my_ptr); printf(" | Carácteres FT: %d\n",n_ft);
-	n = printf("%p",my_ptr); printf(" | Carácteres: %d\n",n);
-	my_ptr = str;
-	n_ft = ft_printf("%p",my_ptr); printf(" | Carácteres FT: %d\n",n_ft);
-	n = printf("%p",my_ptr); printf(" | Carácteres: %d\n",n);
-
-	//! DECIMALES CON SIGNO
-	printf("---------------------------\n");
-	printf("DECIMALES CON SIGNO\n");
-	n_ft = ft_printf("%d",2147483647); printf(" | Carácteres FT: %d\n",n_ft);
-	n = printf("%d",2147483647); printf(" | Carácteres: %d\n",n);
-
-	//! DECIMALES SIN SIGNO
-	printf("---------------------------\n");
-	printf("DECIMALES SIN SIGNO\n");
-	n_ft = ft_printf("%u",-2147483647); printf(" | Carácteres FT: %d\n",n_ft);
-	n = printf("%u",-2147483647); printf(" | Carácteres: %d\n",n);
-	//! ENTEROS
-	printf("---------------------------\n");
-	printf("ENTEROS\n");
-	n_ft = ft_printf("%i",-2147483647); printf(" | Carácteres FT: %d\n",n_ft);
-	n = printf("%i",-2147483647); printf(" | Carácteres: %d\n",n);
-	//! HEXADECIMALES
-	printf("---------------------------\n");
-	printf("HEXADECIMALES\n");
-	unsigned int hex = 0;
-	n_ft = ft_printf("x: %x | X: %X",hex,hex); printf(" | Carácteres FT: %d\n",n_ft);
-	n = printf("x: %x | X: %X",hex,hex); printf(" | Carácteres: %d\n",n);
-	hex = 9841678;
-	n_ft = ft_printf("x: %x | X: %X",hex,hex); printf(" | Carácteres FT: %d\n",n_ft);
-	n = printf("x: %x | X: %X",hex,hex); printf(" | Carácteres: %d\n",n);
-	//! PORCENTAJES
-	printf("---------------------------\n");
-	printf("PORCENTAJES\n");
- 	n_ft = ft_printf(" %% "); printf(" | Carácteres FT: %d\n",n_ft);
-	n = printf(" %% ");  printf(" | Carácteres: %d\n",n);
-
-//! Diferenciador erroneo
-	printf("---------------------------\n");
-	printf("DIFERENCIADOR\n");
- 	n_ft = ft_printf("%k"); printf(" | Carácteres FT: %d\n",n_ft);
-system("leaks -q a.out");
-	return (0);
 }
