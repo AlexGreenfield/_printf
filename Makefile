@@ -6,7 +6,7 @@
 #    By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/27 17:54:28 by acastrov          #+#    #+#              #
-#    Updated: 2024/10/11 17:38:13 by acastrov         ###   ########.fr        #
+#    Updated: 2024/10/11 19:42:07 by acastrov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,12 +30,10 @@ all: $(NAME)
 %.o: %.c
 	@$(CC) $(CFLAGS) -c $< -o $@
 
-# CP???
 $(NAME): $(OBJS) $(LIBFTDIR)/$(LIBFT)
 	@cp $(LIBFTDIR)/$(LIBFT) $(NAME)
 	@ar -rcs $(NAME) $(OBJS)
 
-# I don't understand make followed by C
 $(LIBFTDIR)/$(LIBFT):
 	@make -C $(LIBFTDIR) CFLAGS="$(CFLAGS)"
 

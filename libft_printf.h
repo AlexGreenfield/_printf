@@ -6,17 +6,16 @@
 /*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 19:32:20 by acastrov          #+#    #+#             */
-/*   Updated: 2024/10/11 17:38:45 by acastrov         ###   ########.fr       */
+/*   Updated: 2024/10/11 19:41:28 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_PRINTF_H
 # define LIBFT_PRINTF_H
 
-
-#include "libft/libft.h"
-#include <stdarg.h>
-#include <stdint.h>
+# include "libft/libft.h"
+# include <stdarg.h>
+# include <stdint.h>
 
 // Reference to main ft_printf
 int	ft_printf(char const *format, ...);
