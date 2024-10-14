@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft_printf.h                                     :+:      :+:    :+:   */
+/*   printf.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 19:32:20 by acastrov          #+#    #+#             */
-/*   Updated: 2024/10/11 17:38:45 by acastrov         ###   ########.fr       */
+/*   Updated: 2024/10/14 20:36:34 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	ft_putnbr_printf(int n);
 int	ft_putuint_printf(unsigned int n);
 
 // FT that uses hex
-int	ft_hex(int n, char specifier);
+int	ft_hex(unsigned int n, char specifier);
 int	ft_ptr(uintptr_t ptr, int flag);
 
 #endif

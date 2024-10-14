@@ -6,7 +6,7 @@
 /*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 19:33:00 by acastrov          #+#    #+#             */
-/*   Updated: 2024/10/14 20:31:44 by acastrov         ###   ########.fr       */
+/*   Updated: 2024/10/14 20:36:14 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,8 @@ int	ft_putuint_printf(unsigned int n) // The same as putnbr, but without negativ
 	return (i);
 }
 // Writes a hex decimal number
-int	ft_hex(int n, char specifier) // We print a number in hex decimal in upper or lower casse, according to the specifier
+int	ft_hex(unsigned int n, char specifier) // We print a number in hex decimal in upper or lower casse, according to the specifier
 {
-	long int	nb; // A int for managing INT_MIN to positive conversion. We don't take lint as argument as it will mess with pointer movement in var_args
 	int				i; // Return value
 	char			*hex_base; // Chars of hexbase
 
@@ -72,15 +71,9 @@ int	ft_hex(int n, char specifier) // We print a number in hex decimal in upper o
 	else
 		hex_base = "0123456789abcdef";
 	i = 0;
-	nb = n;
-	if (n < 0)
-	{
-		i += (int)write(1, "-", 1); // Negative conversion
-		nb = -nb;
-	}
-	if (nb >= 16) // Recursive call to ft_hex, with n divided by 16
-		i += ft_hex(nb / 16, specifier);
-	i += (int)write(1, &hex_base[nb % 16], 1); // We print the hex_base index position
+	if (n >= 16) // Recursive call to ft_hex, with n divided by 16
+		i += ft_hex(n / 16, specifier);
+	i += (int)write(1, &hex_base[n % 16], 1); // We print the hex_base index position
 	return (i);
 }
 // Writes a pointer address
