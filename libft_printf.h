@@ -6,7 +6,7 @@
 /*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 19:32:20 by acastrov          #+#    #+#             */
-/*   Updated: 2024/10/11 19:41:28 by acastrov         ###   ########.fr       */
+/*   Updated: 2024/10/14 18:56:11 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_putnbr_printf(int n);
 int	ft_putuint_printf(unsigned int n);
 
 // FT that uses hex
-int	ft_hex(int n, char specifier);
+int	ft_hex(unsigned int n, char specifier);
 int	ft_ptr(uintptr_t ptr, int flag);
 
 #endif

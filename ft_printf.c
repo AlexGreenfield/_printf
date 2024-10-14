@@ -6,7 +6,7 @@
 /*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:22:41 by acastrov          #+#    #+#             */
-/*   Updated: 2024/10/11 20:12:04 by acastrov         ###   ########.fr       */
+/*   Updated: 2024/10/14 19:27:40 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static int	ft_checker(char const *format)
 			format++;
 			if (!*format || ft_strchr(set, *format) == NULL)
 			{
-				write(1, "WARNING: invalid specifier", 26);
+				write(2, "error: invalid or incomplete format specifier", 47);
 				return (0);
 			}
 			format++;
@@ -92,7 +92,7 @@ static int	ft_switcher(char specifier, va_list args)
 	else if (specifier == 'u')
 		switch_i = ft_putuint_printf(va_arg(args, unsigned int));
 	else if (specifier == 'x' || specifier == 'X')
-		switch_i = ft_hex(va_arg(args, int), specifier);
+		switch_i = ft_hex(va_arg(args, unsigned int), specifier);
 	else if (specifier == 'p')
 		switch_i += ft_ptr(va_arg(args, uintptr_t), 1);
 	return (switch_i);

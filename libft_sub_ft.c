@@ -6,7 +6,7 @@
 /*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 19:33:00 by acastrov          #+#    #+#             */
-/*   Updated: 2024/10/11 19:39:18 by acastrov         ###   ########.fr       */
+/*   Updated: 2024/10/14 18:56:45 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,7 @@ int	ft_putnbr_printf(int n)
 	int	i;
 
 	if (n == -2147483648)
-	{
 		return ((int)write(1, "-2147483648", 11));
-	}
 	i = 0;
 	if (n < 0)
 	{
@@ -40,9 +38,7 @@ int	ft_putnbr_printf(int n)
 		n = -n;
 	}
 	if (n >= 10)
-	{
 		i += ft_putnbr_printf(n / 10);
-	}
 	d = (n % 10) + '0';
 	i += (int)write(1, &d, 1);
 	return (i);
@@ -56,18 +52,15 @@ int	ft_putuint_printf(unsigned int n)
 
 	i = 0;
 	if (n >= 10)
-	{
 		i += ft_putnbr_printf(n / 10);
-	}
 	d = (n % 10) + '0';
 	i += (unsigned int)write(1, &d, 1);
 	return (i);
 }
 
 // Writes a hex decimal number
-int	ft_hex(int n, char specifier)
+int	ft_hex(unsigned int n, char specifier)
 {
-	long int	nb;
 	int			i;
 	char		*hex_base;
 
@@ -76,15 +69,9 @@ int	ft_hex(int n, char specifier)
 	else
 		hex_base = "0123456789abcdef";
 	i = 0;
-	nb = n;
-	if (n < 0)
-	{
-		i += (int)write(1, "-", 1);
-		nb = -nb;
-	}
-	if (nb >= 16)
-		i += ft_hex(nb / 16, specifier);
-	i += (int)write(1, &hex_base[nb % 16], 1);
+	if (n >= 16)
+		i += ft_hex(n / 16, specifier);
+	i += (int)write(1, &hex_base[n % 16], 1);
 	return (i);
 }
 
