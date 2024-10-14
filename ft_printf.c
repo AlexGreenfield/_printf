@@ -6,11 +6,11 @@
 /*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:22:41 by acastrov          #+#    #+#             */
-/*   Updated: 2024/10/11 20:18:05 by acastrov         ###   ########.fr       */
+/*   Updated: 2024/10/14 20:30:19 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft_printf.h"
+#include "printf.h"
 
 static int	ft_checker(char const *format);
 static int	ft_switcher(char specifier, va_list args);
@@ -37,7 +37,7 @@ int	ft_printf(char const *format, ...)
 			if (!*format)
 				break ;
 			i += ft_switcher(*format, args); // We add the result of the ft called by switch
-			format++; // We need a total breaker if valid specifier
+			format++;
 		}
 	}
 	va_end(args);
@@ -58,9 +58,9 @@ static int	ft_checker(char const *format)
 		if (*format == '%') // If we find a %, we check for the next character
 		{
 			format++;
-			if (!*format || ft_strchr(set, *format) == NULL )// If there's not a valid specifier, we print a warning and return 0, caution with null
+			if (!*format || ft_strchr(set, *format) == NULL )// If there's not a valid specifier, we print a warning and return 0
 				{
-					write(1, "WARNING: invalid specifier", 26);
+					write(2, "error: invalid or incomplete format specifier", 47);
 					return (0);
 				}
 			format++; // If the specifier is ok, me move the pointer and search again
