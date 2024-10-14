@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft_printf.h                                     :+:      :+:    :+:   */
+/*   printf.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 19:32:20 by acastrov          #+#    #+#             */
-/*   Updated: 2024/10/14 18:56:11 by acastrov         ###   ########.fr       */
+/*   Updated: 2024/10/14 21:45:37 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_PRINTF_H
-# define LIBFT_PRINTF_H
+#ifndef PRINTF_H
+# define PRINTF_H
 
 # include "libft/libft.h"
 # include <stdarg.h>
