@@ -6,12 +6,12 @@
 /*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 19:33:00 by acastrov          #+#    #+#             */
-/*   Updated: 2024/10/14 18:56:45 by acastrov         ###   ########.fr       */
+/*   Updated: 2024/10/14 20:33:50 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
-#include "libft_printf.h"
+#include "printf.h"
 
 // Writes a given string
 int	ft_putstr_printf(char *s)

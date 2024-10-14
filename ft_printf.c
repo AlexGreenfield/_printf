@@ -6,11 +6,11 @@
 /*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:22:41 by acastrov          #+#    #+#             */
-/*   Updated: 2024/10/14 19:27:40 by acastrov         ###   ########.fr       */
+/*   Updated: 2024/10/14 20:34:05 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft_printf.h"
+#include "printf.h"
 
 static int	ft_checker(char const *format);
 static int	ft_switcher(char specifier, va_list args);
