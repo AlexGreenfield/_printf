@@ -6,7 +6,7 @@
 /*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 19:33:00 by acastrov          #+#    #+#             */
-/*   Updated: 2024/10/14 20:33:50 by acastrov         ###   ########.fr       */
+/*   Updated: 2024/10/18 14:46:03 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	ft_putuint_printf(unsigned int n)
 
 	i = 0;
 	if (n >= 10)
-		i += ft_putnbr_printf(n / 10);
+		i += ft_putuint_printf(n / 10);
 	d = (n % 10) + '0';
 	i += (unsigned int)write(1, &d, 1);
 	return (i);

@@ -6,7 +6,7 @@
 /*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:22:41 by acastrov          #+#    #+#             */
-/*   Updated: 2024/10/14 20:34:05 by acastrov         ###   ########.fr       */
+/*   Updated: 2024/10/18 14:45:34 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,6 @@ static int	ft_switcher(char specifier, va_list args)
 	else if (specifier == 'x' || specifier == 'X')
 		switch_i = ft_hex(va_arg(args, unsigned int), specifier);
 	else if (specifier == 'p')
-		switch_i += ft_ptr(va_arg(args, uintptr_t), 1);
+		switch_i = ft_ptr(va_arg(args, uintptr_t), 1);
 	return (switch_i);
 }
