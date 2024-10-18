@@ -6,7 +6,7 @@
 /*   By: acastrov <acastrov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 17:22:41 by acastrov          #+#    #+#             */
-/*   Updated: 2024/10/14 20:30:19 by acastrov         ###   ########.fr       */
+/*   Updated: 2024/10/18 14:47:29 by acastrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,6 @@ static int	ft_switcher(char specifier, va_list args) // Switch to x ft accoring 
 	else if (specifier == 'x' || specifier == 'X') // Hex numbers, note the specifier
 		switch_i = ft_hex(va_arg(args, int), specifier);
 	else if (specifier == 'p') // Pointer value. Note the flag value for the first call of ft_ptr to avoid repeating 0x
-		switch_i += ft_ptr(va_arg(args, uintptr_t), 1);
+		switch_i = ft_ptr(va_arg(args, uintptr_t), 1);
 	return (switch_i);
 }
