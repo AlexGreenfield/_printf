@@ -92,13 +92,13 @@ int main()
 	printf("---------------------------\n");
 	printf("DIFERENCIADOR\n");
  	n_ft = ft_printf("Especificador invalido: %z", 42); printf(" | Carácteres FT: %d\n",n_ft);
-	n = printf("Especificador invalido: %z pero hay texto detras", 42); printf(" | Carácteres: %d\n",n);
+	n = printf("Especificador invalido: %z", 42); printf(" | Carácteres: %d\n",n);
 
 //! % solo al final de string
 	printf("---------------------------\n");
 	printf("%% al final de la string\n");
  	n_ft = ft_printf("Al final hay un %"); printf(" | Carácteres FT: %d\n",n_ft);
-	n = printf("Al final hay un % "); printf(" | Carácteres: %d\n",n);
+	n = printf("Al final hay un %"); printf(" | Carácteres: %d\n",n);
 
 //! % en medio de una string de string
 	printf("---------------------------\n");
